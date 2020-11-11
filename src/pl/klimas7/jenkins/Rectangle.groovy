@@ -14,7 +14,6 @@ class Rectangle {
         return "Rectangle{" +
                 "a=" + a +
                 ", b=" + b +
-                ", area= " + a * b;
-        '}';
+                ", area= " + a * b + "}";
     }
 }
