@@ -31,4 +31,57 @@ stage('Print Build Info') {
 }
 ```
 
+
 Run job!
+
+```
+@Library('jenkins-shared-lib')_
+
+pipeline {
+    parameters {
+        string defaultValue: 'One default', description: '', name: 'param1', trim: false
+        string defaultValue: 'Two default', description: '', name: 'param2', trim: false
+    }
+    agent any
+    
+    stages {
+        stage('Print Build Info') {
+            steps {
+                script {
+                    printBuildinfo {
+                        name = "Sample Name"
+                    }
+                }
+            }
+        }
+        stage('Disable throttling') {
+            steps {
+                script {
+                    disableThrottling()
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                script { 
+                    deploy()
+                }
+            }
+        }
+        stage('Enable throtling') {
+            steps {
+                script {
+                    enableThrottling()
+                }
+            }
+        }
+        stage('Check Status') {
+            steps {
+                script {
+                    checkStatus()
+                }
+            }
+        }
+    }
+}
+```
